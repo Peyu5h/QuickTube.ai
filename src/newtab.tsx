@@ -3,22 +3,18 @@ import { useState } from "react"
 import "./style.css"
 
 function IndexNewtab() {
-  const [data, setData] = useState("")
+  const [data, setData] = useState(0)
 
   return (
-    <div
-      className="new-tab"
-      style={{
-        padding: 16,
-        display: "flex",
-        flexDirection: "column"
-      }}>
-      <h1>
-        Welcome to your <a href="https://www.plasmo.com">Plasmo</a> Extension!
-      </h1>
-      <input onChange={(e) => setData(e.target.value)} value={data} />
-      <footer>Crafted by @PlasmoHQ</footer>
-    </div>
+    <button
+      onClick={() => setData(data + 1)}
+      type="button"
+      className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      Count:
+      <span className="inline-flex items-center justify-center w-8 h-4 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+        {data}
+      </span>
+    </button>
   )
 }
 
