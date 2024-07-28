@@ -1,3 +1,4 @@
+import { getVideoData } from "@/utils/functions"
 import React, { useEffect } from "react"
 
 import { useExtension } from "../contexts/extensionContext"
@@ -28,7 +29,9 @@ export default function Extension() {
       if (id && id !== extensionVideoId) {
         setExtensionVideoId(id)
         setExtensionLoading(true)
-        setExtensionLoading(false)
+        // setExtensionLoading(false)
+        const data = await getVideoData(id)
+        console.log(data)
       }
     }
 
