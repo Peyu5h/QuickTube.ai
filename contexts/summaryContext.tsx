@@ -34,28 +34,27 @@ interface SummaryProviderProps {
 }
 
 export function SummaryProvider({ children }: SummaryProviderProps) {
-  const [summaryIsGenerating, setSummaryIsGenerating] = useState<boolean>(false)
   const [summaryModel, setSummaryModel] = useState<Model>(models[0])
   const [summaryPrompt, setSummaryPrompt] = useState<Prompt>(prompts[0])
-  const [summaryIsError, setSummaryIsError] = useState<boolean>(false)
   const [summaryContent, setSummaryContent] = useState<string | null>(null)
+  const [summaryIsError, setSummaryIsError] = useState<boolean>(false)
+  const [summaryIsGenerating, setSummaryIsGenerating] = useState<boolean>(false)
 
   const port = usePort("completion")
   const { extensionData, extensionLoading } = useExtension()
 
-  const generateSummary = async (e: any) => {
+  async function generateSummary(e: any) {
     e.preventDefault()
 
-    if (summaryContent != null) {
+    if (summaryContent !== null) {
       setSummaryContent(null)
     }
 
     setSummaryIsGenerating(true)
     setSummaryIsError(false)
-
     port.send({
-      model: summaryModel.content,
       prompt: summaryPrompt.content,
+      model: summaryModel.content,
       context: extensionData
     })
   }
@@ -65,6 +64,25 @@ export function SummaryProvider({ children }: SummaryProviderProps) {
     setSummaryIsGenerating(false)
     setSummaryIsError(false)
   }, [extensionLoading])
+
+  useEffect(() => {
+    if (port.data?.message !== undefined && port.data.isEnd === false) {
+      setSummaryContent(port.data.message)
+    } else {
+      setSummaryIsGenerating(false)
+    }
+
+    setSummaryIsError(false)
+  }, [port.data?.message])
+
+  useEffect(() => {
+    if (port.data?.error !== undefined && port.data?.error !== null) {
+      setSummaryIsError(true)
+      setSummaryContent(null)
+    } else {
+      setSummaryIsError(false)
+    }
+  }, [port.data?.error])
 
   const value = {
     summaryModel,

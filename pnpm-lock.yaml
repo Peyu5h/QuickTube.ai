@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@google/generative-ai':
+        specifier: ^0.16.0
+        version: 0.16.0
       '@plasmohq/messaging':
         specifier: ^0.6.2
         version: 0.6.2(react@18.2.0)
@@ -323,6 +326,10 @@ packages:
 
   '@floating-ui/utils@0.2.5':
     resolution: {integrity: sha512-sTcG+QZ6fdEUObICavU+aB3Mp8HY4n14wYHdxK4fXjPmv3PXZZeY5RaguJmGyeH/CJQhX3fqKUtS4qc1LoHwhQ==}
+
+  '@google/generative-ai@0.16.0':
+    resolution: {integrity: sha512-doB5ZNxS6m+jUZqaLCeYXfBZCdq6Ho0ibkq5/17xe1qAUZpCLWlvCDGtqFPqqO+yezNmvGatS0KhV22yiOT3DA==}
+    engines: {node: '>=18.0.0'}
 
   '@ianvs/prettier-plugin-sort-imports@4.1.1':
     resolution: {integrity: sha512-kJhXq63ngpTQ2dxgf5GasbPJWsJA3LgoOdd7WGhpUSzLgLgI4IsIzYkbJf9kmpOHe7Vdm/o3PcRA3jmizXUuAQ==}
@@ -3840,6 +3847,8 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
 
   '@floating-ui/utils@0.2.5': {}
+
+  '@google/generative-ai@0.16.0': {}
 
   '@ianvs/prettier-plugin-sort-imports@4.1.1(@vue/compiler-sfc@3.3.4)(prettier@3.2.4)':
     dependencies:

@@ -1,5 +1,5 @@
 import { useSummary } from "@/contexts/summaryContext"
-import { models, prompts, type Model, type Prompt } from "@/lib/constants"
+import { prompts, type Prompt } from "@/lib/constants"
 import { CheckIcon, ClipboardCopyIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { useState } from "react"
 
@@ -22,10 +22,8 @@ export default function SummaryActions() {
   const {
     summaryPrompt,
     summaryIsGenerating,
-    summaryModel,
     summaryContent,
     setSummaryPrompt,
-    setSummaryModel,
     generateSummary
   } = useSummary()
 
@@ -55,26 +53,6 @@ export default function SummaryActions() {
 
   return (
     <div className="flex flex-row w-full justify-between items-center sticky top-0 z-20 bg-white pt-3.5 pb-2 px-3">
-      <Select
-        value={summaryModel.value}
-        onValueChange={(value) =>
-          setSummaryModel(models.find((model) => model.value === value))
-        }>
-        <SelectTrigger className="w-fit space-x-3">
-          <SelectValue placeholder="Model" />
-        </SelectTrigger>
-        <SelectContent>
-          {models.map((model: Model) => (
-            <SelectItem key={model.value} value={model.value}>
-              <div className="flex flex-row items-center">
-                <div className="mr-2">{model.icon}</div>
-                {model.label}
-              </div>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-
       <div className="flex flex-row space-x-2">
         <TooltipProvider>
           <Tooltip>

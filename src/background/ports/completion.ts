@@ -1,12 +1,11 @@
-import { OpenAI } from "openai"
+import { GoogleGenerativeAI } from "@google/generative-ai"
 
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY
-
-const llm = new OpenAI({
-  apiKey: OPENAI_API_KEY
-})
+const genAI = new GoogleGenerativeAI(
+  process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
+    "AIzaSyB3LfQ1HS2RIjsjp6FFjHZ7nOc4UOQWKW4"
+)
 
 async function createCompletion(model: string, prompt: string, context: any) {
   const parsed = context.transcript.events
@@ -20,11 +19,15 @@ async function createCompletion(model: string, prompt: string, context: any) {
 
   const USER = `${prompt}\n\nVideo Title: ${context.metadata.title}\nVideo Transcript: ${parsed}`
 
-  return llm.beta.chat.completions.stream({
-    messages: [{ role: "user", content: USER }],
-    model: model || "gpt-3.5-turbo",
-    stream: true
+  const geminiModel = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash-latest"
   })
+
+  const result = await geminiModel.generateContentStream({
+    contents: [{ role: "user", parts: [{ text: USER }] }]
+  })
+
+  return result
 }
 
 const handler: PlasmoMessaging.PortHandler = async (req, res) => {
@@ -37,16 +40,19 @@ const handler: PlasmoMessaging.PortHandler = async (req, res) => {
   try {
     const completion = await createCompletion(model, prompt, context)
 
-    completion.on("content", (delta, snapshot) => {
-      cumulativeData += delta
+    for await (const chunk of completion.stream) {
+      const chunkText = chunk.text()
+      cumulativeData += chunkText
       res.send({ message: cumulativeData, error: "", isEnd: false })
-    })
+    }
 
-    completion.on("end", () => {
-      res.send({ message: "END", error: "", isEnd: true })
-    })
+    res.send({ message: "END", error: "", isEnd: true })
   } catch (error) {
-    res.send({ error: "something went wrong" })
+    console.error("Error in handler:", error)
+    res.send({
+      error: "Something went wrong",
+      details: (error as Error).message
+    })
   }
 }
 

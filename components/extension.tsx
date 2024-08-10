@@ -31,9 +31,9 @@ export default function Extension() {
       if (id && id !== extensionVideoId) {
         setExtensionVideoId(id)
         setExtensionLoading(true)
-        // setExtensionLoading(false)
         const data = await getVideoData(id)
-        console.log(data)
+        setExtensionData(data)
+        setExtensionLoading(false)
       }
     }
 
