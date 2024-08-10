@@ -2,7 +2,7 @@ import { getVideoData } from "@/utils/functions"
 import React, { useEffect } from "react"
 
 import { useExtension } from "../contexts/extensionContext"
-import Actions from "./Actions"
+import ExtensionActions from "./actions/extenstionActions"
 import Panels from "./Panels/Panels"
 import { Collapsible, CollapsibleContent } from "./ui/collapsible"
 
@@ -69,7 +69,7 @@ export default function Extension() {
           open={extensionIsOpen}
           onOpenChange={setExtensionIsOpen}
           className="space-y-3">
-          <Actions />
+          <ExtensionActions />
           <CollapsibleContent className="w-full h-fit max-h-[500px] border border-zinc-200 rounded-md overflow-auto ">
             <Panels />
           </CollapsibleContent>

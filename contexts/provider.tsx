@@ -1,5 +1,10 @@
 import { ExtensionProvider } from "./extensionContext"
+import { SummaryProvider } from "./summaryContext"
 
 export default function Providers({ children }) {
-  return <ExtensionProvider>{children}</ExtensionProvider>
+  return (
+    <ExtensionProvider>
+      <SummaryProvider>{children}</SummaryProvider>
+    </ExtensionProvider>
+  )
 }

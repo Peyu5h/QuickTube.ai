@@ -8,12 +8,16 @@ import {
   Link2Icon,
   Pencil2Icon
 } from "@radix-ui/react-icons"
-import { TooltipContent } from "@radix-ui/react-tooltip"
 import { useState } from "react"
 
-import { Button } from "./ui/button"
-import { CollapsibleTrigger } from "./ui/collapsible"
-import { Tooltip, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
+import { Button } from "../ui/button"
+import { CollapsibleTrigger } from "../ui/collapsible"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "../ui/tooltip"
 
 export default function ExtensionActions() {
   const { setExtensionPanel, extensionIsOpen, setExtensionIsOpen } =
