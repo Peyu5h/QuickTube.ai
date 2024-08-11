@@ -1,5 +1,7 @@
 import { memo, useMemo } from "react"
 
+import TranscriptItems from "./transcript-items"
+
 type Transcript = {
   text: string
   startTime: number
@@ -31,7 +33,11 @@ function TranscriptList({ transcript, searchInput }: TranscriptListProps) {
   return (
     <div className="space-y-4 mr-3 ml-3">
       {filteredTranscripts.map((item: Transcript) => (
-        <h1>bruh</h1>
+        <TranscriptItems
+          key={item.startTime}
+          item={item}
+          searchInput={searchInput}
+        />
       ))}
     </div>
   )

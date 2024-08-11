@@ -2,6 +2,7 @@ import { useExtension } from "@/contexts/extensionContext"
 import { useTranscript } from "@/contexts/transcriptContext"
 import React from "react"
 
+import TranscriptSkeleton from "../skeleton/transcriptSkeleton"
 import TranscriptList from "../transcript/transcript-list"
 
 interface TranscriptContentProps {
@@ -18,7 +19,7 @@ const TranscriptContent = React.forwardRef<
   if (extensionLoading || !extensionData) {
     return (
       <div className="flex justify-center items-center w-full p-3 bg-white">
-        loading ...
+        <TranscriptSkeleton />
       </div>
     )
   }
