@@ -3,8 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai"
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 
 const genAI = new GoogleGenerativeAI(
-  process.env.GOOGLE_GENERATIVE_AI_API_KEY ||
-    "AIzaSyB3LfQ1HS2RIjsjp6FFjHZ7nOc4UOQWKW4"
+  process.env.PLASMO_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY
 )
 
 async function createCompletion(model: string, prompt: string, context: any) {

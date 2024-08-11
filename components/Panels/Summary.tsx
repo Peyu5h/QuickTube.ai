@@ -6,7 +6,7 @@ import SummaryContent from "../content/summaryContent"
 const Summary = () => {
   return (
     <div>
-      <div className="scrollbar">
+      <div className="scrollbar ">
         <SummaryActions />
         <SummaryContent />
       </div>

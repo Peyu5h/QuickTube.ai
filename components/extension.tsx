@@ -63,14 +63,15 @@ export default function Extension() {
   return (
     <main
       ref={setExtensionContainer}
-      className={`antialiased w-full mb-3 z-10 ${extensionTheme}`}>
+      style={{ zIndex: 3 }}
+      className={`antialiased w-full mb-3 ${extensionTheme}`}>
       <div className="w-full">
         <Collapsible
           open={extensionIsOpen}
           onOpenChange={setExtensionIsOpen}
           className="space-y-3">
           <ExtensionActions />
-          <CollapsibleContent className="w-full h-fit max-h-[500px] border border-zinc-200 rounded-md overflow-auto ">
+          <CollapsibleContent className="w-full h-fit max-h-[500px] border border-zinc-200 dark:border-zinc-800 rounded-md overflow-auto flex gap-x-4 collapsible-content">
             <Panels />
           </CollapsibleContent>
         </Collapsible>

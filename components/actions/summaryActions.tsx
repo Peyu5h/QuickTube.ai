@@ -5,13 +5,6 @@ import { useState } from "react"
 
 import { Button } from "../ui/button"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "../ui/select"
-import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -52,7 +45,7 @@ export default function SummaryActions() {
   }
 
   return (
-    <div className="flex flex-row w-full justify-between items-center sticky top-0 z-20 bg-white pt-3.5 pb-2 px-3">
+    <div className="flex flex-row w-full justify-between items-center sticky top-0 z-20 dark:bg-[#0f0f0f] dark:text-white pt-3.5 pb-2 px-3">
       <div className="flex flex-row space-x-2">
         <TooltipProvider>
           <Tooltip>

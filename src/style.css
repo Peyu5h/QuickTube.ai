@@ -72,6 +72,18 @@
   border-radius: 5px;
 }
 
+.collapsible-content[data-state="closed"] {
+  display: none;
+}
+
+.collapsible-content[data-state="open"] {
+  border-top: 1px solid theme("colors.zinc.200");
+}
+
+.dark .collapsible-content[data-state="open"] {
+  border-top: 1px solid theme("colors.zinc.800");
+}
+
 @layer base {
   * {
     @apply border-border;
