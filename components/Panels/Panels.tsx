@@ -8,10 +8,10 @@ export default function Panels() {
   const { extensionPanel } = useExtension()
 
   return (
-    <div className="">
+    <div>
       {extensionPanel === "Summary" && <Summary />}
-      {extensionPanel === "ActivityLog" && <Transcript />}
-      {extensionPanel === "Settings" && <Chat />}
+      {extensionPanel === "Transcript" && <Transcript />}
+      {extensionPanel === "Chat" && <Chat />}
     </div>
   )
 }

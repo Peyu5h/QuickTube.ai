@@ -14,7 +14,7 @@ export default function SummaryContent() {
 
   if (summaryIsGenerating) {
     return (
-      <div className="flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f]">
+      <div className="flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f] overflow-y-hidden h-[300px]">
         <SummarySkeleton />
       </div>
     )

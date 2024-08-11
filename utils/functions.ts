@@ -88,3 +88,36 @@ export function cleanJsonTranscipt(transcript) {
 
   return chunks
 }
+
+export function cleanTextTranscript(transcript) {
+  let textLines = []
+  let tempText = ""
+  let lastTime = 0
+
+  transcript.events.forEach((event) => {
+    if (event.segs) {
+      event.segs.forEach((seg) => {
+        const segmentStartTimeMs = event.startMs + (seg.tOffsetMs || 0)
+
+        if (
+          tempText &&
+          (segmentStartTimeMs - lastTime > 1000 || seg.utf8 === "\n")
+        ) {
+          const timeFormatted = new Date(lastTime).toISOString().substr(11, 12)
+          textLines.push(`${timeFormatted}: ${tempText.trim()}`)
+          tempText = ""
+        }
+
+        lastTime = segmentStartTimeMs
+        tempText += seg.utf8
+      })
+    }
+  })
+
+  if (tempText) {
+    const timeFormatted = new Date(lastTime).toISOString().substr(11, 12)
+    textLines.push(`${timeFormatted}: ${tempText.trim()}`)
+  }
+
+  return textLines.join("\n")
+}

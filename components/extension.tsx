@@ -32,6 +32,7 @@ export default function Extension() {
         setExtensionVideoId(id)
         setExtensionLoading(true)
         const data = await getVideoData(id)
+        console.log(data)
         setExtensionData(data)
         setExtensionLoading(false)
       }
@@ -45,7 +46,6 @@ export default function Extension() {
   }, [extensionVideoId])
 
   useEffect(() => {
-    console.log("Fetches Theme ")
     const getCssVariable = (name: string) => {
       const rootStyle = getComputedStyle(document.documentElement)
       return rootStyle.getPropertyValue(name).trim()
