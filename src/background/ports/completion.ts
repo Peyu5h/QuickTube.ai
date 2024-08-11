@@ -1,3 +1,4 @@
+import { models } from "@/lib/constants"
 import { GoogleGenerativeAI } from "@google/generative-ai"
 
 import type { PlasmoMessaging } from "@plasmohq/messaging"
@@ -18,11 +19,11 @@ async function createCompletion(model: string, prompt: string, context: any) {
 
   const USER = `${prompt}\n\nVideo Title: ${context.metadata.title}\nVideo Transcript: ${parsed}`
 
-  const geminiModel = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash-latest"
+  const Model = genAI.getGenerativeModel({
+    model: models[0].content
   })
 
-  const result = await geminiModel.generateContentStream({
+  const result = await Model.generateContentStream({
     contents: [{ role: "user", parts: [{ text: USER }] }]
   })
 

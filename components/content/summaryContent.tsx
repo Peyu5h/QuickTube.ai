@@ -1,5 +1,6 @@
 import { useSummary } from "@/contexts/summaryContext"
 
+import SummaryActions from "../actions/summaryActions"
 import Markdown from "../Markdown"
 import SummarySkeleton from "../skeleton/summarySkeleton"
 import { Button } from "../ui/button"
@@ -42,7 +43,9 @@ export default function SummaryContent() {
   }
 
   return (
-    <div className="flex justify-center items-center w-full  bg-white dark:bg-[#0f0f0f] ">
+    <div className="flex flex-col justify-center items-center w-full  bg-white dark:bg-[#0f0f0f] ">
+      <SummaryActions />
+
       <div className="h-[600px] w-full px-6 py-3 opacity-80 border-none bg-white dark:bg-[#0f0f0f]  ">
         <Markdown
           markdown={summaryContent}

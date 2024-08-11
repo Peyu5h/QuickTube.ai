@@ -7,7 +7,6 @@ const Summary = () => {
   return (
     <div>
       <div className="scrollbar ">
-        <SummaryActions />
         <SummaryContent />
       </div>
     </div>

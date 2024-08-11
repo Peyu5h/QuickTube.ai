@@ -1,5 +1,4 @@
 import { useSummary } from "@/contexts/summaryContext"
-import { prompts, type Prompt } from "@/lib/constants"
 import { CheckIcon, ClipboardCopyIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { useState } from "react"
 
@@ -45,12 +44,13 @@ export default function SummaryActions() {
   }
 
   return (
-    <div className="flex flex-row w-full justify-between items-center sticky top-0 z-20 dark:bg-[#0f0f0f] dark:text-white pt-3.5 pb-2 px-3">
-      <div className="flex flex-row space-x-2">
+    <div className="flex flex-row w-full justify-end items-center sticky top-0 z-20 dark:bg-[#0f0f0f] dark:text-white pt-3.5 pb-2 px-3">
+      <div className="flex flex-row space-x-2 ">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
               <Button
+                className="bg-white dark:bg-[#0f0f0f]"
                 variant="outline"
                 size="icon"
                 onClick={generateSummary}
@@ -68,6 +68,7 @@ export default function SummaryActions() {
           <Tooltip>
             <TooltipTrigger>
               <Button
+                className="bg-white dark:bg-[#0f0f0f]"
                 variant="outline"
                 size="icon"
                 onClick={CopySummary}

@@ -15,15 +15,15 @@ export type Prompt = {
 
 export const models: Model[] = [
   {
-    value: "default",
-    label: "GPT-3.5",
-    content: "gpt-3.5-turbo",
+    value: "first",
+    label: "Gemini 1.5 Flash (Latest)",
+    content: "gemini-1.5-flash-latest",
     icon: <BarChartIcon className="h-4 w-4 opacity-70" />
   },
   {
-    value: "GPT-4",
-    label: "GPT-4",
-    content: "gpt-4-turbo",
+    value: "GPT-3.5",
+    label: "GPT-3.5",
+    content: "gpt-3.5",
     icon: <BarChartIcon className="h-4 w-4 opacity-70" />
   }
 ]
@@ -32,7 +32,7 @@ export const prompts: Prompt[] = [
   {
     value: "default",
     label: "prompt",
-    content: `Here is the prompt (you can replace the default in the extension tab):
+    content: `Here is the prompt:
 
     "Your output should use the following template:
     
@@ -58,7 +58,7 @@ export const prompts: Prompt[] = [
     
     You are also a transcription AI and you have been provided with a text that may contain mentions of sponsorships or brand names. Your task write what you have been said to do while avoiding any mention of sponsorships or brand names.
     
-    Please ensure that the summary, bullet points, and explanations fit within the 330-word limit, while still offering a comprehensive and clear understanding of the video's content. Use the text above: "`
+    Please ensure that the summary, bullet points, and explanations fit within the 500-word limit, while still offering a comprehensive and clear understanding of the video's content. Make summary comparatively longer. Use the text above: "`
   }
 ]
 

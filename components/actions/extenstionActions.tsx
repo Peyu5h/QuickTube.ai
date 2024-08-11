@@ -60,7 +60,7 @@ export default function ExtensionActions() {
               if (!extensionIsOpen) setExtensionIsOpen(true)
             }}
             className="
-          rounded-r-none focus:z-10 bg-transparent space-x-2 items-center">
+          rounded-r-none focus:z-10 bg-transparent space-x-2 items-center  border-r-2">
             <Pencil2Icon className="h-4 w-4 opacity-60" />
             <span className="opacity-90">Summary</span>
           </Button>
