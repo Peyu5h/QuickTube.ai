@@ -59,6 +59,19 @@
   }
 }
 
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #444e54;
+  border-radius: 5px;
+}
+
 @layer base {
   * {
     @apply border-border;

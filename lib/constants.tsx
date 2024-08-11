@@ -31,7 +31,7 @@ export const models: Model[] = [
 export const prompts: Prompt[] = [
   {
     value: "default",
-    label: "Default (Prompt)",
+    label: "prompt",
     content: `Here is the prompt (you can replace the default in the extension tab):
 
     "Your output should use the following template:
@@ -61,11 +61,6 @@ export const prompts: Prompt[] = [
     You are also a transcription AI and you have been provided with a text that may contain mentions of sponsorships or brand names. Your task write what you have been said to do while avoiding any mention of sponsorships or brand names.
     
     Please ensure that the summary, bullet points, and explanations fit within the 330-word limit, while still offering a comprehensive and clear understanding of the video's content. Use the text above: "`
-  },
-  {
-    value: "prompt-two",
-    label: "Prompt Two",
-    content: "Give me a summary of this video"
   }
 ]
 

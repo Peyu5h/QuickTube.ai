@@ -91,23 +91,6 @@ export default function SummaryActions() {
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-
-        <Select
-          value={summaryPrompt.value}
-          onValueChange={(value) =>
-            setSummaryPrompt(prompts.find((prompt) => prompt.value === value))
-          }>
-          <SelectTrigger className="w-fit space-x-3">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {prompts.map((prompt: Prompt) => (
-              <SelectItem key={prompt.value} value={prompt.value}>
-                {prompt.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
       </div>
     </div>
   )

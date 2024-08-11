@@ -106,9 +106,7 @@ export default function ExtensionActions() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p className="border border-zinc-200 dark:border-zinc-800 dark:text-white px-2 py-2 mb-2.5 rounded-lg">
-                Copy Video URL
-              </p>
+              <p>Copy video url</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
