@@ -1,13 +1,7 @@
 import { useExtension } from "@/contexts/extensionContext"
 import { useTranscript } from "@/contexts/transcriptContext"
 import { cleanTextTranscript } from "@/utils/functions"
-import {
-  CheckIcon,
-  ClipboardCopyIcon,
-  Crosshair1Icon,
-  MagnifyingGlassIcon
-} from "@radix-ui/react-icons"
-import { useState } from "react"
+import { Crosshair1Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons"
 
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
@@ -31,13 +25,13 @@ export default function TranscriptActions({
   const { extensionLoading, extensionData } = useExtension()
 
   return (
-    <div className="flex flex-row w-full  justify-between items-center sticky top-0 z-10 bg-white pt-3.5 pb-3 px-3 space-x-4 dark:bg-[#0f0f0f]">
+    <div className="flex flex-row w-full  justify-between items-center sticky top-0 z-10  pt-3.5 pb-3 px-3 space-x-4 bg-background">
       <div className="relative w-full">
-        <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 opacity-60" />
+        <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 opacity-60 " />
         <Input
           type="text"
           placeholder="Search Transcript"
-          className="pl-8"
+          className="pl-8 border border-border"
           onChange={(e) => {
             e.preventDefault()
             setTranscriptSearch(e.currentTarget.value)

@@ -71,7 +71,7 @@ export default function Extension() {
           onOpenChange={setExtensionIsOpen}
           className="space-y-3">
           <ExtensionActions />
-          <CollapsibleContent className="w-full h-fit max-h-[500px] border border-zinc-200 dark:border-zinc-800 rounded-md overflow-auto flex gap-x-4 collapsible-content">
+          <CollapsibleContent className="w-full h-fit max-h-[500px] border  rounded-md overflow-auto flex gap-x-4 collapsible-content">
             <Panels />
           </CollapsibleContent>
         </Collapsible>

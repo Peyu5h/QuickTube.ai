@@ -32,12 +32,12 @@ export default function Transcript() {
         })
 
         targetElement.classList.add("bg-zinc-100")
-        targetElement.classList.add("dark:bg-zinc-800")
+        targetElement.classList.add("dark:bg-zinc-900")
         targetElement.classList.add("transition-all")
 
         setTimeout(() => {
           targetElement.classList.add("bg-zinc-100")
-          targetElement.classList.add("dark:bg-zinc-800")
+          targetElement.classList.add("dark:bg-zinc-900")
           targetElement.classList.add("transition-all")
         }, 3000)
       }
@@ -45,8 +45,8 @@ export default function Transcript() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full  bg-white dark:bg-[#0f0f0f] ">
-      <div className="h-[600px] w-full px-6  opacity-80 border-none bg-white dark:bg-[#0f0f0f] overflow-y-auto ">
+    <div className="flex flex-col justify-center items-center w-full h-full bg-background   ">
+      <div className="h-[600px] w-full px-6  opacity-80 border-none overflow-y-auto ">
         <TranscriptActions jumpCurrentTime={jumpCurrentTime} />
         <TranscriptContent ref={transcriptListRef} />
       </div>

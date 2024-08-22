@@ -1,33 +1,24 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+## Setup
 
-## Getting Started
+1. **Clone the repository:**
 
-First, run the development server:
+2. **Create a `.env` file:**
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+   ```env
+   PLASMO_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY= add-ur-key
+   ```
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+3. **Start the development server:**
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
+   ```bash
+   npx plasmo dev
+   ```
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+4. **Enable Developer Mode in your browser:**
 
-## Making production build
+5. **Load your extension:**
 
-Run the following:
+   - Go to the `build` folder in your project directory.
+   - Select `chrome-mv3-dev`.
 
-```bash
-pnpm build
-# or
-npm run build
-```
-
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
-
-## Submit to the webstores
-
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+credits @kuluruvineeth

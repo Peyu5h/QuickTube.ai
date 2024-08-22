@@ -22,6 +22,7 @@ export const getStyle = () => {
   const baseFontSize = 12
   let updatedCssText = cssText.replaceAll(":root", ":host(plasmo-csui)")
   const remRegex = /([\d.]+)rem/g
+  // Convert rem to px
   updatedCssText = updatedCssText.replace(remRegex, (match, remValue) => {
     const pixels = parseFloat(remValue) * baseFontSize
     return `${pixels}px`

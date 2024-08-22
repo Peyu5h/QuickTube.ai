@@ -8,7 +8,7 @@ export default function Panels() {
   const { extensionPanel } = useExtension()
 
   return (
-    <div className="w-full dark:bg-[#0f0f0f] dark:text-white">
+    <div className="w-full bg-background text-foreground">
       {extensionPanel === "Summary" && <Summary />}
       {extensionPanel === "Transcript" && <Transcript />}
       {extensionPanel === "Chat" && <Chat />}

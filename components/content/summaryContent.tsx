@@ -15,7 +15,7 @@ export default function SummaryContent() {
 
   if (summaryIsGenerating) {
     return (
-      <div className="flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f] overflow-y-hidden h-[300px]">
+      <div className="flex justify-center items-center w-full p-3 bg-background overflow-y-hidden h-[300px]">
         <SummarySkeleton />
       </div>
     )
@@ -23,15 +23,13 @@ export default function SummaryContent() {
 
   if (summaryIsError) {
     return (
-      <div className="p-3 bg-white dark:bg-[#0f0f0f] text-red-500">
-        {summaryContent}
-      </div>
+      <div className="p-3 bg-background text-red-500">{summaryContent}</div>
     )
   }
 
   if (!summaryContent) {
     return (
-      <div className="flex justify-center items-center w-full p-3 bg-white dark:bg-[#0f0f0f]">
+      <div className="flex justify-center items-center w-full p-3 bg-background">
         <Button
           variant="outline"
           className="w-full h-12"
@@ -43,14 +41,12 @@ export default function SummaryContent() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full  bg-white dark:bg-[#0f0f0f] ">
+    <div className="flex flex-col w-full h-full bg-background">
       <SummaryActions />
-
-      <div className="h-[600px] w-full px-6 py-3 opacity-80 border-none bg-white dark:bg-[#0f0f0f]  ">
-        <Markdown
-          markdown={summaryContent}
-          className="pb-6 bg-white dark:bg-[#0f0f0f] "
-        />
+      <div className="flex-grow overflow-y-auto">
+        <div className="h-full w-full px-6 py-3 bg-background">
+          <Markdown markdown={summaryContent} className="pb-6" />
+        </div>
       </div>
     </div>
   )

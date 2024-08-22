@@ -25,6 +25,7 @@ export async function getVideoData(id: string) {
     const pageData = await fetch(`https://www.youtube.com/watch?v=${id}`)
     const body = await pageData.text()
     const playerResponseMatch = body.match(YT_INITIAL_PLAYER_RESPONSE_RE)
+
     if (!playerResponseMatch) {
       console.warn("Unable to parse playerResponse")
       return
