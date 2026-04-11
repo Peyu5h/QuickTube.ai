@@ -9,7 +9,7 @@ https://github.com/user-attachments/assets/969216a1-da4a-43bb-b5e2-a022a2a289fd
 2. **Create a `.env` file:**
 
    ```env
-   PLASMO_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY= add-ur-key
+   PLASMO_PUBLIC_GROQ_API_KEY= add-ur-key
    ```
 
 3. **Start the development server:**
