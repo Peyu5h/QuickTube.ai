@@ -138,8 +138,8 @@ export default function PromptForm({ className }: PromptFormProps) {
         <Textarea
           ref={inputRef}
           tabIndex={0}
-          onKeyDown={() => onkeydown}
-          onKeyUp={() => onkeyup}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
           placeholder="Send a message."
           className="min-h-[50px] w-full resize-none bg-transparent px-6 py-6 focus-within:outline-none text-[12px] border"
           autoFocus

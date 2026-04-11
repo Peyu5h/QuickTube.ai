@@ -1,13 +1,16 @@
-import { models } from "@/lib/constants"
-import { GoogleGenerativeAI } from "@google/generative-ai"
+import Groq from "groq-sdk"
 
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 
-const genAI = new GoogleGenerativeAI(
-  process.env.PLASMO_PUBLIC_GOOGLE_GENERATIVE_AI_API_KEY
-)
+const groq = new Groq({
+  apiKey: process.env.PLASMO_PUBLIC_GROQ_API_KEY
+})
 
 async function createCompletion(model: string, prompt: string, context: any) {
+  if (!context.transcript || !context.transcript.events) {
+    throw new Error("No transcript available for this video")
+  }
+
   const parsed = context.transcript.events
     .filter((x: { segs: any }) => x.segs)
     .map((x: { segs: any[] }) =>
@@ -19,15 +22,11 @@ async function createCompletion(model: string, prompt: string, context: any) {
 
   const USER = `${prompt}\n\nVideo Title: ${context.metadata.title}\nVideo Transcript: ${parsed}`
 
-  const Model = genAI.getGenerativeModel({
-    model: models[0].content
+  return groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    messages: [{ role: "user", content: USER }],
+    stream: true
   })
-
-  const result = await Model.generateContentStream({
-    contents: [{ role: "user", parts: [{ text: USER }] }]
-  })
-
-  return result
 }
 
 const handler: PlasmoMessaging.PortHandler = async (req, res) => {
@@ -40,8 +39,8 @@ const handler: PlasmoMessaging.PortHandler = async (req, res) => {
   try {
     const completion = await createCompletion(model, prompt, context)
 
-    for await (const chunk of completion.stream) {
-      const chunkText = chunk.text()
+    for await (const chunk of completion) {
+      const chunkText = chunk.choices[0]?.delta?.content || ""
       cumulativeData += chunkText
       res.send({ message: cumulativeData, error: "", isEnd: false })
     }

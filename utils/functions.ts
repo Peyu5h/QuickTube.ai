@@ -1,3 +1,5 @@
+import { YoutubeTranscript } from "youtube-transcript"
+
 const YT_INITIAL_PLAYER_RESPONSE_RE =
   /ytInitialPlayerResponse\s*=\s*({.+?})\s*;\s*(?:var\s+(?:meta|head)|<\/script|\n)/
 
@@ -19,42 +21,54 @@ function compareTracks(track1, track2) {
 }
 
 export async function getVideoData(id: string) {
-  // @ts-ignore
-  let player = window.ytInitialPlayerResponse
-  if (!player || id !== player.videoDetails.videoId) {
-    const pageData = await fetch(`https://www.youtube.com/watch?v=${id}`)
-    const body = await pageData.text()
-    const playerResponseMatch = body.match(YT_INITIAL_PLAYER_RESPONSE_RE)
+  try {
+    // @ts-ignore
+    let player = window.ytInitialPlayerResponse
+    if (!player || id !== player.videoDetails.videoId) {
+      const pageData = await fetch(`https://www.youtube.com/watch?v=${id}`)
+      const body = await pageData.text()
+      const playerResponseMatch = body.match(YT_INITIAL_PLAYER_RESPONSE_RE)
 
-    if (!playerResponseMatch) {
-      console.warn("Unable to parse playerResponse")
-      return
+      if (!playerResponseMatch) {
+        console.warn("Unable to parse playerResponse")
+        return null
+      }
+      player = JSON.parse(playerResponseMatch[1])
     }
-    player = JSON.parse(playerResponseMatch[1])
-  }
 
-  const metadata = {
-    title: player.videoDetails.title,
-    duration: player.videoDetails.lengthSeconds,
-    author: player.videoDetails.author,
-    views: player.videoDetails.viewCount
-  }
+    const metadata = {
+      title: player.videoDetails.title,
+      duration: player.videoDetails.lengthSeconds,
+      author: player.videoDetails.author,
+      views: player.videoDetails.viewCount
+    }
 
-  if (player.captions && player.captions.playerCaptionsTracklistRenderer) {
-    const tracks = player.captions.playerCaptionsTracklistRenderer.captionTracks
-    if (tracks && tracks.length > 0) {
-      tracks.sort(compareTracks)
-      const transcriptResponse = await fetch(tracks[0].baseUrl + "&fmt=json3")
-      const transcript = await transcriptResponse.json()
+    try {
+      const ts = await YoutubeTranscript.fetchTranscript(id)
+      const transcript = {
+        events: ts.map((t) => ({
+          tStartMs: t.offset,
+          dDurationMs: t.duration,
+          segs: [{ utf8: t.text + " ", tOffsetMs: 0 }]
+        }))
+      }
       return { metadata, transcript }
+    } catch(err) {
+      console.warn("Could not fetch transcript", err)
+      return { metadata, transcript: null }
     }
+  } catch (error) {
+    console.error("Error fetching video data:", error)
+    return null
   }
-
-  return { metadata, transcript: null }
 }
 
 // to handle transcript data
 export function cleanJsonTranscipt(transcript) {
+  if (!transcript || !transcript.events || transcript.events.length === 0) {
+    return []
+  }
+
   const chunks = []
 
   let currentChunk = ""
@@ -91,6 +105,10 @@ export function cleanJsonTranscipt(transcript) {
 }
 
 export function cleanTextTranscript(transcript) {
+  if (!transcript || !transcript.events) {
+    return ""
+  }
+
   let textLines = []
   let tempText = ""
   let lastTime = 0

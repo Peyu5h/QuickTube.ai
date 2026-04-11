@@ -3,7 +3,7 @@ import Providers from "@/contexts/provider"
 import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig, PlasmoGetInlineAnchor } from "plasmo"
 
-require("dotenv").config()
+// require("dotenv").config()
 
 const INJECTED_ELEMENT_ID = "#secondary.style-scope.ytd-watch-flexy"
 

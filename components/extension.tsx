@@ -31,10 +31,17 @@ export default function Extension() {
       if (id && id !== extensionVideoId) {
         setExtensionVideoId(id)
         setExtensionLoading(true)
-        const data = await getVideoData(id)
-        console.log(data)
-        setExtensionData(data)
-        setExtensionLoading(false)
+        try {
+          const data = await getVideoData(id)
+          console.log(data)
+          if (data) {
+            setExtensionData(data)
+          }
+        } catch (error) {
+          console.error("Failed to fetch video data:", error)
+        } finally {
+          setExtensionLoading(false)
+        }
       }
     }
 

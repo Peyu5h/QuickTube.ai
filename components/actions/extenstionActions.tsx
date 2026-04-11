@@ -7,8 +7,8 @@ import {
   Link2Icon,
   Pencil2Icon
 } from "@radix-ui/react-icons"
-import { useState } from "react"
-import { GoStar } from "react-icons/go"
+import { useEffect, useState } from "react"
+import { GoStar, GoStarFill } from "react-icons/go"
 
 import { Button } from "../ui/button"
 import { CollapsibleTrigger } from "../ui/collapsible"
@@ -20,10 +20,30 @@ import {
 } from "../ui/tooltip"
 
 export default function ExtensionActions() {
-  const { setExtensionPanel, extensionIsOpen, setExtensionIsOpen } =
+  const { setExtensionPanel, extensionIsOpen, setExtensionIsOpen, extensionVideoId } =
     useExtension()
 
   const [isCopied, setIsCopied] = useState<boolean>(false)
+  const [isStarred, setIsStarred] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (extensionVideoId) {
+      const stored = localStorage.getItem(`starred_${extensionVideoId}`)
+      setIsStarred(stored === "true")
+    }
+  }, [extensionVideoId])
+
+  const toggleStar = () => {
+    if (extensionVideoId) {
+      const newState = !isStarred
+      setIsStarred(newState)
+      if (newState) {
+        localStorage.setItem(`starred_${extensionVideoId}`, "true")
+      } else {
+        localStorage.removeItem(`starred_${extensionVideoId}`)
+      }
+    }
+  }
 
   const copyToClipboard = (value: string) => {
     if (typeof window === "undefined" || !navigator.clipboard?.writeText) {
@@ -53,7 +73,7 @@ export default function ExtensionActions() {
       <div className="flex items-center space-x-2">
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <Button
                 variant="outline"
                 size="icon"
@@ -73,19 +93,21 @@ export default function ExtensionActions() {
         </TooltipProvider>
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <Button
                 variant="outline"
                 size="icon"
-                className="rounded-lg"
-                onClick={() =>
-                  window.open("https://github.com/Peyu5h/quickTube", "_blank")
-                }>
-                <GoStar className="h-4.5 w-4.5 opacity-60" />
+                onClick={toggleStar}
+                className="rounded-lg">
+                {isStarred ? (
+                  <GoStarFill className="h-4.5 w-4.5 text-yellow-500 opacity-100" />
+                ) : (
+                  <GoStar className="h-4.5 w-4.5 opacity-60" />
+                )}
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Star on GitHub</p>
+              <p>Favorite Video</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -121,7 +143,7 @@ export default function ExtensionActions() {
               setExtensionPanel("Chat")
               if (!extensionIsOpen) setExtensionIsOpen(true)
             }}
-            className="w-full 
+            className="w-full
           rounded-l-none focus:z-10 bg-transparent space-x-2 items-center">
             <ChatBubbleIcon className="h-4 w-4 opacity-60" />
             <span className="opacity-90">Chat</span>
